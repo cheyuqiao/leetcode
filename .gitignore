@@ -11,11 +11,15 @@ asciidoctor.css
 atlassian-ide-plugin.xml
 build/
 dump.rdb
-out
 spring-shell.log
 target/
 test-output
 spring-*/bin
+
+# leetcode
+out/
+*.json
+*.class
 
 # Eclipse artifacts, including WTP generated manifests
 .classpath
