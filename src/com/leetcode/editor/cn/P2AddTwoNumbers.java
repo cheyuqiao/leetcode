@@ -55,9 +55,10 @@ public class P2AddTwoNumbers{
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
+        return null;
     }
 }
+class ListNode {}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
