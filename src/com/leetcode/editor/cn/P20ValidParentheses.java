@@ -60,12 +60,12 @@ import java.util.Stack;
 public class P20ValidParentheses{
     public static void main(String[] args) {
         String test = "{[]}";
-        System.out.println(test + ": " + new Solution().isValid(test));
+        System.out.println(test + ": " + new Solution20().isValid(test));
     }
 
 }
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution20 {
     public boolean isValid(String s) {
         Stack<String> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
