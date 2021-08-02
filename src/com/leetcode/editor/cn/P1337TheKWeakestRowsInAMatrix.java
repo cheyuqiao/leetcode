@@ -63,6 +63,8 @@ package com.leetcode.editor.cn;
 // Related Topics 数组 二分查找 矩阵 排序 堆（优先队列） 
 // 👍 97 👎 0
 
+import java.util.Arrays;
+
 public class P1337TheKWeakestRowsInAMatrix{
     public static void main(String[] args) {
         int[][] mat = new int[][]{{1, 1, 0, 0, 0},
@@ -77,7 +79,9 @@ public class P1337TheKWeakestRowsInAMatrix{
     }
 }
 
-
+/**
+ * 此题考的是二分查找
+ */
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution1337 {
     public int[] kWeakestRows(int[][] mat, int k) {
@@ -125,3 +129,30 @@ class Solution1337 {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+/**
+ * 网友的代码，思路一致。将每行数量也存为二维数组，使用Arrays函数进行排序、输出。
+ */
+class Solution1337Func2 {
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int n = mat.length,m=mat[0].length;
+        int[][] count = new int[n][2];
+        for(int i=0;i<n;i++){
+            count[i][1] = i;
+            for(int j=0;j<m;j++){
+                if(mat[i][j] == 0) {
+                    break;
+                }
+                count[i][0]++;
+            }
+        }
+        //下标0是军人数目，下标1是原下标。
+        // 如果军人数目相等，则按照原下标从小到大排序，否则按照军人数目从小到大排序
+        Arrays.sort(count,(a, b)->(a[0]==b[0]?a[1]-b[1]:a[0]-b[0]));
+        int[] ans = new int[k];
+        for(int i=0;i<k;i++){
+            ans[i] = count[i][1];
+        }
+        return ans;
+    }
+}
