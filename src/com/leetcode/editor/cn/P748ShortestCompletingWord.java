@@ -74,19 +74,66 @@ package com.leetcode.editor.cn;
 // 1 <= words.length <= 1000 
 // 1 <= words[i].length <= 15 
 // words[i] 由小写英文字母组成 
-// 
+//
 // Related Topics 数组 哈希表 字符串 
 // 👍 62 👎 0
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class P748ShortestCompletingWord{
+//    public static void main(String[] args) {
+//        String[] word = new String[] {"step","steps","stripe","stepple"};
+//        new Solution().shortestCompletingWord("1s3 PSt", word);
+//    }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String shortestCompletingWord(String licensePlate, String[] words) {
-        licensePlate = licensePlate.replaceAll("[^(0-9)]", "");
+        String result = null;
+        licensePlate = licensePlate.replaceAll("[^(A-Za-z)]", "");
         licensePlate = licensePlate.replaceAll(" ","");
         licensePlate = licensePlate.toLowerCase();
-        System.out.println(licensePlate);
-        return null;
+
+        char [] stringArr = licensePlate.toCharArray();
+        Map<String,Integer> licenseNumMap = new HashMap<>();
+        for (char c : stringArr) {
+            String temp = licensePlate;
+            int count = 0;
+            while(temp.indexOf(c) != -1) {
+                temp = temp.substring(temp.indexOf(c) + 1,temp.length());
+                count++;
+            }
+            licenseNumMap.put(String.valueOf(c), count);
+        }
+
+        for (String word : words) {
+            int hasStr = 0;
+            for (Map.Entry<String, Integer> entry : licenseNumMap.entrySet()) {
+                String key = entry.getKey();
+                Integer keyNum = entry.getValue();
+                int count = 0;
+                String temp = word;
+                while(temp.indexOf(key) != -1) {
+                    temp = temp.substring(temp.indexOf(key) + 1,temp.length());
+                    count++;
+                }
+                if (count >= keyNum) {
+                    hasStr++;
+                }
+            }
+            if (hasStr == licenseNumMap.size()) {
+                if (result != null) {
+                    if (result.length() > word.length()) {
+                        result = word;
+                    }
+                } else {
+                    result = word;
+                }
+            }
+        }
+        return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
